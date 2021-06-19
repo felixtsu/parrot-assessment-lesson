@@ -1,3 +1,6 @@
+info.onLifeZero(function () {
+    game.over(false)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     count += 1
     info.changeScoreBy(1)
@@ -14,9 +17,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     otherSprite.destroy()
     info.changeLifeBy(-1)
 })
-info.onLifeZero(function () {
-    game.over(false)
-})
 let level = 0
 let skullAngle = 0
 let skull: Sprite = null
@@ -29,14 +29,14 @@ controller.moveSprite(player)
 player.setFlag(SpriteFlag.StayInScreen, true)
 for (let index = 0; index < 10; index++) {
     food = sprites.create(sprites.food.smallCherries, SpriteKind.Food)
-    food.setPosition(Math.randomRange(20, 140), Math.randomRange(20, 100))
+    food.setPosition(randint(20, 140), randint(20, 100))
 }
 for (let index = 0; index < 2; index++) {
     skull = sprites.create(sprites.castle.skellyFront, SpriteKind.Enemy)
-    skullAngle = Math.randomRange(0, 360)
+    skullAngle = randint(0, 360)
     skull.setFlag(SpriteFlag.BounceOnWall, true)
     skull.setVelocity(20 * Math.sin(skullAngle), 20 * Math.cos(skullAngle))
-    skull.setPosition(Math.randomRange(20, 140), Math.randomRange(20, 100))
+    skull.setPosition(randint(20, 140), randint(20, 100))
 }
 info.startCountdown(10)
 player.say("Level " + level, 1000)
