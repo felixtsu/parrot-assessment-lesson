@@ -2,11 +2,9 @@ info.onLifeZero(function () {
     game.over(false)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    count += 1
     info.changeScoreBy(1)
     otherSprite.destroy()
-    otherSprite.startEffect(effects.smiles, 200)
-    if (count > 9) {
+    if (info.score() == 10) {
         music.jumpUp.play()
     } else {
         music.baDing.play()
@@ -17,12 +15,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     otherSprite.destroy()
     info.changeLifeBy(-1)
 })
-let level = 0
 let skullAngle = 0
 let skull: Sprite = null
 let food: Sprite = null
-let count = 0
-count = 0
 game.splash("Hurry!", "Eat the cherries!")
 let player = sprites.create(sprites.castle.princessFront0, SpriteKind.Player)
 controller.moveSprite(player)
@@ -39,4 +34,3 @@ for (let index = 0; index < 2; index++) {
     skull.setPosition(randint(20, 140), randint(20, 100))
 }
 info.startCountdown(10)
-player.say("Level " + level, 1000)
